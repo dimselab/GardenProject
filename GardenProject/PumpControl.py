@@ -4,27 +4,35 @@ Water should be checked every hour.
 Should turn off pump on an off string recieved.
 Should turn on pump on a on string recieved.
 """
-import RPi.GPIO as GPIO
-# setup GPIO using Board numbering
-GPIO.setmode(GPIO.BOARD)
+from RPi import GPIO
+# from MQTTControl import overlord
+GPIO.cleanup()
+GPIO.setmode(GPIO.BOARD) #set up BOARD GPIO numbering.
+GPIO.setup(22, GPIO.OUT) #set up GPIO 22 as output.
+
 
 class Pump(object):
-    name = ""
 
-    """ initializer """
-    def __init__(self, name):
+    """ Initializer """
+    def __init__(self,pinname):
+        self.name = pinname
+        #overlord.register_minion(self)
 
-        self.name = name # initialize variable.
+    def __str__(self):
+        return self.name
 
-    def notify(self, str):
-        if str == "on":
-            print("Pump is turned on")
-
-        elif str =="off":
-            print("Pump is turned off")
-
-        self.str = str
-
+    """ 
+    Notify method should take a command from the MQTT server.
+    Depending on command it should either turn the pump on or off.
+    Command should originate from the humidity measurer.
+    """
+    def notify(self, command):
+        if(command == "Pump ON"):
+            GPIO.OUTPUT(self.pinname, 0)
+        elif(command == "Pump OFF"):
+            GPIO.OUTPUT(self.pinname, 1)
+        else:
+            return "Unknown command"
 
 
 
