@@ -6,10 +6,11 @@ class Lights:
         self.pinname = pinname
         overlord.register_minion(self)
     def notify (self, command):
-        if (command.lower() == "Lights OFF"):
+        if (command.lower() == "lights off"):
             GPIO.OUTPUT(self.pinname, 0)
-            "Lights turned off"
-        elif (command.lower() == "Lights ON"):
+            print("Lights turned off")
+        elif (command.lower() == "lights on"):
             GPIO.OUTPUT(self.pinname, 1)
+            print("Lights turned on")
         else:
             return "Unknown Command"
