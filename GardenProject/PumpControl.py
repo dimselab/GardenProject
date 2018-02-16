@@ -10,15 +10,17 @@ Should turn on pump on a on string received.
 from RPi import GPIO
 GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD) #set up BOARD GPIO numbering.
+import GardenProject.WaterMeasurer as WaterSensor
 
 
 class Pump(object):
 
     """ Initializer """
-    def __init__(self, overlord, pinname):
+    def __init__(self, overlord, pinname, pinSensor):
         self.pinname = pinname
         GPIO.setup(pinname, GPIO.out)
         overlord.register_minion(self)
+        self.pinSensor = pinSensor
 
 
 
@@ -31,7 +33,20 @@ class Pump(object):
 
     def notify(self, command):
         """ Turn on and off output to relay, returns string based on input. """
+        waterSensorCheck = False
 
+        while(waterSensorCheck == False):
+            if(waterSensorCheck == False):
+                GPIO.OUTPUT(self.pinname, 1)
+                print('pump turned off')
+                return "pump turned off"
+            else:
+                GPIO.OUTPUT(self.pinname, 0)
+                print('pump turned on')
+                return "pump turned on"
+            waterSensorCheck == True
+            waterSensorCheck == WaterSensor.PumpCheck(self.pinSensor)
+"""
         if(command.lower() == "pump off"):
             GPIO.OUTPUT(self.pinname, 0)
             print('pump turned off')
@@ -45,4 +60,4 @@ class Pump(object):
         else:
             print("unknown command")
             return "unknown command"
-
+"""
