@@ -33,19 +33,20 @@ class Pump(object):
 
     def notify(self, command):
         """ Turn on and off output to relay, returns string based on input. """
-        waterSensorCheck = False
+        if (command.lower() == "pump on"):
+            waterSensorCheck = False
 
-        while(waterSensorCheck == False):
-            if(waterSensorCheck == False):
-                GPIO.OUTPUT(self.pinname, 1)
-                print('pump turned off')
-                return "pump turned off"
-            else:
-                GPIO.OUTPUT(self.pinname, 0)
-                print('pump turned on')
-                return "pump turned on"
-            waterSensorCheck == True
-            waterSensorCheck == WaterSensor.PumpCheck(self.pinSensor)
+            while(waterSensorCheck == False):
+                if(waterSensorCheck == False):
+                    GPIO.OUTPUT(self.pinname, 1)
+                    print('pump turned off')
+                    return "pump turned off"
+                else:
+                    GPIO.OUTPUT(self.pinname, 0)
+                    print('pump turned on')
+                    return "pump turned on"
+                waterSensorCheck == True
+                waterSensorCheck == WaterSensor.PumpCheck(self.pinSensor)
 """
         if(command.lower() == "pump off"):
             GPIO.OUTPUT(self.pinname, 0)
