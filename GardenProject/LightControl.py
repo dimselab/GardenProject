@@ -1,3 +1,8 @@
+"""
+Daniel
+Philip
+Niklas
+"""
 from RPi import GPIO
 GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
@@ -9,9 +14,11 @@ class Lights:
     def notify (self, command):
         if (command.lower() == "lights off"):
             GPIO.output(self.pinname, 0)
-            print('Lights turned off')
+            print( 'Lights turned off')
+            return 'Lights turned off'
         elif (command.lower() == "lights on"):
             GPIO.output(self.pinname, 1)
-            print("Lights turned on")
+            print( "Lights turned on")
+            return "Lights turned on"
         else:
             return "Unknown Command"
