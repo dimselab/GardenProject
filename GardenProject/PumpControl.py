@@ -10,7 +10,7 @@ Should turn on pump on a on string received.
 from RPi import GPIO
 GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD) #set up BOARD GPIO numbering.
-import GardenProject.WaterMeasurer as WaterSensor
+import MQTT.WaterMeasurer as WaterSensor
 
 
 class Pump(object):
