@@ -10,6 +10,8 @@ class TakeOnePhoto:
         overlord.register_minion(self)
     #Tager billede naar koert, og gemmer paa det eksisterende.
     def TakePhoto(self):
+        camera.vflip = true
+        camera.resolution = (1920, 1080)
         camera.start_preview()
         sleep(2)
         camera.capture('/home/pi/Desktop/image.jpg')
@@ -17,4 +19,4 @@ class TakeOnePhoto:
     def notify(self, command):
         if "photo" in str(command).lower():
             TakePhoto()
-  
+        
