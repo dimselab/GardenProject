@@ -1,7 +1,10 @@
 """
 Made By: Ricco And Tom
 """
+
 import paho.mqtt.client as mqtt
+import _thread
+
 
 def SetupMQTT():
     Server_Adress = "192.168.3.144";
@@ -12,9 +15,11 @@ def SetupMQTT():
     client.loop_forever();
 
 def on_message(client, userdata, message):
+
     decodedmessage = message.payload.decode("utf-8")
     print("message received %s : %s " % (message.topic, decodedmessage))
-    overlord.notify_minions(decodedmessage)
+
+    _thread.start_new_thread(overlord.notify_minions, (decodedmessage))
 
 class Overlord:
     def __init__(self):
@@ -28,8 +33,8 @@ class Overlord:
         print(args)
         print(self.__minions)
         for minion in self.__minions:
-            print('Notifying ', minion)
-            minion.notify(args)
+            print('Notifying ', str(minion))
+            self.status = minion.notify(args)
 
 overlord = Overlord()
 
