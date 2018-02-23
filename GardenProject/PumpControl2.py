@@ -30,12 +30,13 @@ class Pump(object):
             waterSensorCheck = False
 
             while(waterSensorCheck == False):
-                if(waterSensorCheck == False):
-                    GPIO.output(self.pinname, 1)
-                    print('pump turned off')
-                else:
-                    GPIO.output(self.pinname, 0)
-                    print('pump turned on')
                 waterSensorCheck = True
                 waterSensorCheck = WaterSensor.PumpCheck(self.pinSensor)
+                if(waterSensorCheck == False):
+                    GPIO.output(self.pinname, 1)
+                    print('pump turned on')
+                else:
+                    GPIO.output(self.pinname, 0)
+                    print('pump turned off')
+
         return "pump did its thing -Lardador 2018"
