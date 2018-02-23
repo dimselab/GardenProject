@@ -6,11 +6,11 @@ global Pin_nr
 #Needs the GPIO num for the lvl.
 class WaterMeasurer(object):
     def __init__(self, pin_nr):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(port_nr, GPIO.OUT)
+        GPIO.setup(pin_nr, GPIO.IN)
         self.Pin_nr = pin_nr
 
     #returns 1 for true
     # #returns 0 for false
     def PumpCheck(self):
-        return GPIO.input(Pin_nr)
+        print(GPIO.input(self.Pin_nr))
+        return GPIO.input(self.Pin_nr)
