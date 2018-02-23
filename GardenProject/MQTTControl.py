@@ -19,7 +19,7 @@ def on_message(client, userdata, message):
     decodedmessage = message.payload.decode("utf-8")
     print("message received %s : %s " % (message.topic, decodedmessage))
 
-    _thread.start_new_thread(overlord.notify_minions, (decodedmessage))
+    _thread.start_new_thread(overlord.notify_minions, (decodedmessage,))
 
 class Overlord:
     def __init__(self):
