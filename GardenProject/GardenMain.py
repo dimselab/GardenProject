@@ -14,6 +14,7 @@ import PumpControl as pump
 import WaterMeasurer as water
 import _thread as t
 import time
+import datetime
 
 GPIO.setmode(GPIO.BCM)
 """
@@ -32,7 +33,9 @@ WaterPump = pump.Pump(control.overlord, 23, UpperWater)
 #LAST STEP
 t.start_new_thread(control.SetupMQTT,())
 while(True):
-    if(LowerWater.PumpCheck() == 1):
+    if(datetime.datetime.now() == 0):
+        print('s')
+    if(LowerWater.PumpCheck() == 0):
         on = "pump on"
         WaterPump.notify(on)
     print('Status')
