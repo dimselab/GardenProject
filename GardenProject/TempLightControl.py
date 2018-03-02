@@ -20,7 +20,7 @@ class Temperature:
         GPIO.setup(pinnumber2, GPIO.OUT)
         GPIO.setup(pinnumber3, GPIO.OUT)
         overlord.register_minion(self)
-    def notify(self, command):
+    
         while (True):
 
             timer = time.time()
