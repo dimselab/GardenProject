@@ -12,13 +12,15 @@ import MQTTControl as control
 import LightControl as LC
 import PumpControl as pump
 import WaterMeasurer as water
-import TempLightControl as temp
+import CameraTakePhoto as cam
+#import TempLightControl as temp
 import _thread as t
 import time
 import datetime
 
 GPIO.setmode(GPIO.BCM)
 """
+
 Make objects of att the things
 ex.
 Led1 = led.ExampleClass(control.overlord)
@@ -30,7 +32,9 @@ LowerWater = water.WaterMeasurer(15) #Pin 15 to Lower Watersensor
 
 WaterPump = pump.Pump(control.overlord, 24, UpperWater) #Pin 24 to Waterpump
 
-Temperature = t.start_new_thread(temp.Temperature, (control.overlord, 17, 27, 23)) #Pin 17, 27, 23, 24 to Temperature
+Camara = cam.TakeOnePhoto(control.overlord);
+
+#Temperature = t.start_new_thread(temp.Temperature, (control.overlord, 17, 27, 23)) #Pin 17, 27, 23, 22 to Temperature
 
 #LAST STEP
 t.start_new_thread(control.SetupMQTT,())
@@ -43,7 +47,7 @@ while(True):
             Light.notify("lights on")
     if(LowerWater.PumpCheck() == 0):
         on = "pump on"
-        WaterPump.notify(on)
+        t.start_new_thread(WaterPump.notify, (on,))
     print('Status')
     time.sleep(10)
 
