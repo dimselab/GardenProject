@@ -10,7 +10,7 @@ class TakeOnePhoto:
         overlord.register_minion(self)
     #Tager billede naar koert, og gemmer paa det eksisterende.
     def TakePhoto(self):
-        camera.vflip = true
+        camera.vflip = True
         camera.resolution = (1920, 1080)
         camera.start_preview()
         sleep(2)
@@ -18,5 +18,5 @@ class TakeOnePhoto:
         camera.stop_preview()
     def notify(self, command):
         if "photo" in str(command).lower():
-            TakePhoto()
+            self.TakePhoto()
         
