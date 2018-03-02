@@ -1,6 +1,6 @@
 
 
-# Adafruit_DHT library imported to run DHT22 and DHT11 temperature and humidity sensors.
+# Adafruit_DHT library imported to run DHT11 temperature and humidity sensors. The script for temperature mesurements uses pin 22. 
 
 #Definition init sets the used pins in the temperature control method. 
 #Definition notify is the method that measures temperature and depending on the temp the RGB lamp light up blue, green or red. 
