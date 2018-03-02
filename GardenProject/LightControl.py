@@ -11,8 +11,6 @@ Calling the notify function needs a "command" and it respectively turns on or of
 prints in console what it did and returns it for functions that are waiting for it.
 """
 from RPi import GPIO
-GPIO.cleanup()
-GPIO.setmode(GPIO.BCM)
 class Lights:
     def __init__(self,overlord, pinnumber):
         self.pinnumber = pinnumber
