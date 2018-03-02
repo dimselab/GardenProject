@@ -4,7 +4,8 @@ Made By: Ricco And Tom
 
 import paho.mqtt.client as mqtt
 import _thread
-
+import json
+import requests
 
 def SetupMQTT():
     Server_Adress = "192.168.3.144";
@@ -35,6 +36,26 @@ class Overlord:
         for minion in self.__minions:
             print('Notifying ', str(minion))
             self.status = minion.notify(args)
+
+    def rest_post(self, returnMessage):
+        if("light" in returnMessage):
+            uri = "http://garden-project-web-api.herokuapp.com/api/lights";
+            if("on" in returnMessage):
+                postData = {"status": 'on'};
+            elif("off" in returnMessage):
+                postData = {"status": 'off'};
+            postHeaders ={'Content-type': 'application/json'};
+
+            response = requests.post(uri, json=postData, headers=postHeaders)
+
+
+        elif("pump" in returnMessage):
+            uri = "";
+            postData = {};
+            postHeaders ={};
+        elif(""):
+            print("LOLOLOLOL")
+        
 
 overlord = Overlord()
 
