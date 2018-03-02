@@ -13,7 +13,7 @@ import requests
 
 
 class Temperature:
-    def _init_(self,overlord, pinnumber1, pinnumber2, pinnumber3):
+    def __init__(self,overlord, pinnumber1, pinnumber2, pinnumber3):
         
         
         GPIO.setup(pinnumber1, GPIO.OUT)
